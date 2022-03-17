@@ -3,6 +3,7 @@ package com.tdd.app.controller;
 
 import com.tdd.app.dto.models.ClientDto;
 import com.tdd.app.service.ClientService;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -11,6 +12,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/client")
+@AllArgsConstructor
 public class ClientController {
 
 
@@ -34,7 +36,7 @@ public class ClientController {
     }
 
     @DeleteMapping("/deleteClient/{id}")
-    public String deleteProfile(@PathVariable long id){
+    public String deleteClient(@PathVariable long id){
         return clientService.deleteClient(id);
     }
 

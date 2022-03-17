@@ -63,7 +63,7 @@ class ClientControllerTest {
     }
 
     @Test
-    void deleteProfile() {
+    void deleteClient() {
         ClientDto clientDto1 = new ClientDto(1L, "test1@gmail.com","1222222","test1",12,"homme",true);
         assertThat(clientController.deleteClient(clientDto1.getId())).isEqualTo("Client removed !!");
     }

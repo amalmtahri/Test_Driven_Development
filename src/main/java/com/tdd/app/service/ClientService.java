@@ -5,11 +5,12 @@ import com.tdd.app.dto.service.IMapClassWithDto;
 import com.tdd.app.entity.Client;
 import com.tdd.app.repository.ClientRepository;
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.List;
 
-@Service
+@Service @Slf4j
 @AllArgsConstructor
 public class ClientService implements IClientService {
 
@@ -54,6 +55,17 @@ public class ClientService implements IClientService {
         Client client1=  repository.save(client);
         return clientMapping.convertToDto(client1, ClientDto.class);
 
+    }
+
+    public ClientDto getClientByEmail(String email){
+        Client client = repository.getClientByEmail(email);
+        log.info(String.valueOf(client));
+        return clientMapping.convertToDto(client, ClientDto.class);
+    }
+
+    public List<ClientDto> findBySex(String sex) {
+        List<Client> clients = repository.findBySex(sex);
+        return clientMapping.convertListToListDto(clients, ClientDto.class);
     }
 
 }

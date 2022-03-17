@@ -7,7 +7,6 @@ import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 
 @RestController
@@ -44,5 +43,14 @@ public class ClientController {
     public ClientDto updateClient(@RequestBody ClientDto clientDto){
         return clientService.updateClient(clientDto);
     }
+    @GetMapping("/findByEmail/{email}")
+    public ClientDto findByEmail(@PathVariable("email") String email){
+        return clientService.getClientByEmail(email);
+    }
 
+    @GetMapping("/findBySex/{sex}")
+    public ResponseEntity<List<ClientDto>> findBySex(@PathVariable String sex) {
+        List<ClientDto> clientDtos = clientService.findBySex(sex);
+        return ResponseEntity.ok(clientDtos);
+    }
 }

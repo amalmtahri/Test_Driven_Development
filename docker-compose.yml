@@ -2,12 +2,12 @@ version: "3.8"
 services:
   ### Postgres Database ###
   postgres:
-    container_name: postgres_db
+    container_name: db_postgres
     image: postgres
     volumes:
       - pgdata:/var/lib/postgresql/data
     ports:
-      - "5432:5432"
+      - "5434:5434"
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: amal
@@ -17,7 +17,7 @@ services:
   ### API Spring Boot ###
   api:
     container_name: TDD_dockerimage
-    #image: bamcorepport_dockerimage
+    #image: TDD_dockerimage
     build:
       context: ./
       dockerfile: Dockerfile
@@ -30,7 +30,7 @@ services:
     #  - "postgres:postgres_db"
     environment:
       HOST_NAME: postgres
-      PORT_NUM: 5432
+      PORT_NUM: 5434
       DATABASE_NAME: tdd
       PS_USERNAME: postgres
       PS_PW: amal

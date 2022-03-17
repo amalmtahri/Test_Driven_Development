@@ -4,11 +4,13 @@ import com.tdd.app.dto.models.ClientDto;
 import com.tdd.app.dto.service.IMapClassWithDto;
 import com.tdd.app.entity.Client;
 import com.tdd.app.repository.ClientRepository;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
+@AllArgsConstructor
 public class ClientService implements IClientService {
 
     @Autowired

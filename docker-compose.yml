@@ -7,7 +7,7 @@ services:
     volumes:
       - pgdata:/var/lib/postgresql/data
     ports:
-      - "5434:5434"
+      - "5432:5432"
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: amal
@@ -29,7 +29,7 @@ services:
     #  - "postgres:postgres_db"
     environment:
       HOST_NAME: postgres
-      PORT_NUM: 5434
+      PORT_NUM: 5432
       DATABASE_NAME: tdd
       PS_USERNAME: postgres
       PS_PW: amal

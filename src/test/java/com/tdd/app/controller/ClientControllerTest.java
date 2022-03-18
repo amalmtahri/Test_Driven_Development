@@ -71,4 +71,23 @@ class ClientControllerTest {
         assertThat(clientController.updateClient(clientDto1).getName()).isEqualTo("test1");
 
     }
+
+    @Test
+    void findByEmailTest(){
+        ClientDto clientDto1 = new ClientDto(1L, "test1@gmail.com","1222222","test1",12,"homme",true);
+        Mockito.when(clientController.findByEmail("test1@gmail.com")).thenReturn(clientDto1);
+        assertThat(clientController.findByEmail("test1@gmail.com").getEmail()).isEqualTo("test1@gmail.com");
+    }
+
+    @Test
+    void findBySexTest(){
+        ClientDto client1 = new ClientDto(1L, "test1@gmail.com","1222222","test1",12,"homme",true);
+        ClientDto client2 = new ClientDto(2L, "test2@gmail.com","09876","test2",13,"homme",true);
+        List<ClientDto> clients = new ArrayList<>();
+        clients.add(client1);
+        clients.add(client2);
+        ResponseEntity<List<ClientDto>> clientDtoResponseEntity = clientController.findBySex("homme");
+        assertThat(clientDtoResponseEntity).isNotNull();
+
+    }
 }

@@ -1,7 +1,6 @@
 package com.tdd.app.repository;
 
 import com.tdd.app.entity.Client;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.runner.RunWith;

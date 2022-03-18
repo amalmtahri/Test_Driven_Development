@@ -1,7 +1,6 @@
 package com.tdd.app.repository;
 
 import com.tdd.app.entity.Client;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -21,7 +20,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 class ClientRepositoryTest {
 
     @Mock private ClientRepository clientRepository;
-
 
     @Test
     void getAllClients() {
@@ -51,15 +49,21 @@ class ClientRepositoryTest {
     }
 
     @Test
-    @Disabled
-    void findBySex(){
+    void findBySexTest(){
         Client client1 = new Client(1L, "test1@gmail.com","1222222","test1",12,"homme",true);
         Client client2 = new Client(2L, "test2@gmail.com","09876","test2",13,"homme",true);
         List<Client> clients = new ArrayList<>();
         clients.add(client1);
         clients.add(client2);
         Mockito.when(clientRepository.findBySex("homme")).thenReturn(clients);
-        assertThat(clientRepository.findAll()).isNotNull();
+        assertThat(clientRepository.findBySex("homme")).isNotNull();
+    }
+
+    @Test
+    void findByEmailTest(){
+        Client client1 = new Client(1L, "test1@gmail.com","1222222","test1",12,"homme",true);
+        Mockito.when(clientRepository.getClientByEmail("test1@gmail.com")).thenReturn(client1);
+        assertThat(clientRepository.getClientByEmail("test1@gmail.com").getEmail()).isEqualTo("test1@gmail.com");
 
     }
 

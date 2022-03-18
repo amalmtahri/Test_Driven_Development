@@ -29,7 +29,6 @@ class ClientRepositoryTest {
         clients.add(client2);
         Mockito.when(clientRepository.findAll()).thenReturn(clients);
         assertThat(clientRepository.findAll()).isNotNull();
-
     }
 
     @Test
@@ -63,7 +62,6 @@ class ClientRepositoryTest {
         Client client1 = new Client(1L, "test1@gmail.com","1222222","test1",12,"homme",true);
         Mockito.when(clientRepository.getClientByEmail("test1@gmail.com")).thenReturn(client1);
         assertThat(clientRepository.getClientByEmail("test1@gmail.com").getEmail()).isEqualTo("test1@gmail.com");
-
     }
 
 }

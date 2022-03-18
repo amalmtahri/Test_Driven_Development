@@ -8,11 +8,12 @@
         <version>2.6.4</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
-    <groupId>com</groupId>
+    <groupId>com.example</groupId>
     <artifactId>TDD</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>TDD</name>
     <description>TDD</description>
+    <packaging>jar</packaging>
     <properties>
         <java.version>11</java.version>
     </properties>

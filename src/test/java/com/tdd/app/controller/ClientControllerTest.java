@@ -88,6 +88,5 @@ class ClientControllerTest {
         clients.add(client2);
         ResponseEntity<List<ClientDto>> clientDtoResponseEntity = clientController.findBySex("homme");
         assertThat(clientDtoResponseEntity).isNotNull();
-
     }
 }

@@ -1,26 +1,28 @@
 package com.tdd.app.dto.models;
 
 
+import com.tdd.app.enumeration.Sex;
+
 public class ClientDto {
 
     private long id;
 
     private String email;
 
-    private String phone;
+    private int phone;
 
     private String name;
 
     private int age;
 
-    private String sex;
+    private Sex sex;
 
     private Boolean isActive;
 
     public ClientDto() {
     }
 
-    public ClientDto(long id, String email, String phone, String name, int age, String sex, Boolean isActive) {
+    public ClientDto(long id, String email, int phone, String name, int age, Sex sex, Boolean isActive) {
         this.id = id;
         this.email = email;
         this.phone = phone;
@@ -46,11 +48,11 @@ public class ClientDto {
         this.email = email;
     }
 
-    public String getPhone() {
+    public int getPhone() {
         return phone;
     }
 
-    public void setPhone(String phone) {
+    public void setPhone(int phone) {
         this.phone = phone;
     }
 
@@ -70,11 +72,11 @@ public class ClientDto {
         this.age = age;
     }
 
-    public String getSex() {
+    public Sex getSex() {
         return sex;
     }
 
-    public void setSex(String sex) {
+    public void setSex(Sex sex) {
         this.sex = sex;
     }
 

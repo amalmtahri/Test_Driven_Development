@@ -1,6 +1,7 @@
 package com.tdd.app.controller;
 
 import com.tdd.app.dto.models.ClientDto;
+import com.tdd.app.enumeration.Sex;
 import com.tdd.app.service.ClientService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -37,8 +38,9 @@ class ClientControllerTest {
 
     @Test
     void getAllClients() {
-        ClientDto clientDto1 = new ClientDto(1L, "test1@gmail.com","1222222","test1",12,"homme",true);
-        ClientDto clientDto2 = new ClientDto(2L, "test2@gmail.com","09876","test2",13,"homme",true);
+
+        ClientDto clientDto1 = new ClientDto(1L, "test1@gmail.com",1222222,"test1",12, Sex.Homme,true);
+        ClientDto clientDto2 = new ClientDto(2L, "test2@gmail.com",123456,"test2",13,Sex.Homme,true);
         List<ClientDto> clientDtos = new ArrayList<>();
         clientDtos.add(clientDto1);
         clientDtos.add(clientDto2);
@@ -49,7 +51,7 @@ class ClientControllerTest {
 
     @Test
     void addClient() {
-        ClientDto clientDto1 = new ClientDto(1L, "test1@gmail.com","1222222","test1",12,"homme",true);
+        ClientDto clientDto1 = new ClientDto(1L, "test1@gmail.com",1222222,"test1",12,Sex.Homme,true);
         Mockito.when(clientController.addClient(clientDto1))
                 .thenReturn(clientDto1);
         assertThat(clientController.addClient(clientDto1)).isEqualTo(clientDto1);
@@ -57,7 +59,7 @@ class ClientControllerTest {
 
     @Test
     void findById() {
-        ClientDto clientDto1 = new ClientDto(1L, "test1@gmail.com","1222222","test1",12,"homme",true);
+        ClientDto clientDto1 = new ClientDto(1L, "test1@gmail.com",1222222,"test1",12,Sex.Homme,true);
         Mockito.when(clientController.findById(1L)).thenReturn(clientDto1);
         assertNotNull(clientController.findById(1L));
     }
@@ -65,7 +67,7 @@ class ClientControllerTest {
 
     @Test
     void updateClient() {
-        ClientDto clientDto1 = new ClientDto(1L, "test1@gmail.com","1222222","test1",12,"homme",true);
+        ClientDto clientDto1 = new ClientDto(1L, "test1@gmail.com",1222222,"test1",12,Sex.Homme,true);
         Mockito.when(clientController.updateClient(clientDto1))
                 .thenReturn(clientDto1);
         assertThat(clientController.updateClient(clientDto1).getName()).isEqualTo("test1");
@@ -74,15 +76,15 @@ class ClientControllerTest {
 
     @Test
     void findByEmailTest(){
-        ClientDto clientDto1 = new ClientDto(1L, "test1@gmail.com","1222222","test1",12,"homme",true);
+        ClientDto clientDto1 = new ClientDto(1L, "test1@gmail.com",1222222,"test1",12,Sex.Homme,true);
         Mockito.when(clientController.findByEmail("test1@gmail.com")).thenReturn(clientDto1);
         assertThat(clientController.findByEmail("test1@gmail.com").getEmail()).isEqualTo("test1@gmail.com");
     }
 
     @Test
     void findBySexTest(){
-        ClientDto client1 = new ClientDto(1L, "test1@gmail.com","1222222","test1",12,"homme",true);
-        ClientDto client2 = new ClientDto(2L, "test2@gmail.com","09876","test2",13,"homme",true);
+        ClientDto client1 = new ClientDto(1L, "test1@gmail.com",1222222,"test1",12,Sex.Homme,true);
+        ClientDto client2 = new ClientDto(2L, "test2@gmail.com",234809876,"test2",13,Sex.Homme,true);
         List<ClientDto> clients = new ArrayList<>();
         clients.add(client1);
         clients.add(client2);

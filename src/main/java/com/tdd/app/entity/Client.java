@@ -1,22 +1,27 @@
 package com.tdd.app.entity;
 
 
+import com.tdd.app.enumeration.Sex;
+import lombok.*;
+
 import javax.persistence.*;
 
+
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 public class Client {
 
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", nullable = false)
     private long id;
 
     @Column(name = "email", nullable = false, unique=true)
     private String email;
 
-    @Column(name = "phone", nullable = false, unique=true)
-    private String phone;
+    @Column(name = "phone", nullable = false, unique=true, length = 10)
+    private int phone;
 
     @Column(name = "name", nullable = false)
     private String name;
@@ -25,24 +30,12 @@ public class Client {
     private int age;
 
     @Column(name = "sex", nullable = false)
-    private String sex;
+    @Enumerated(EnumType.STRING)
+    private Sex sex;
 
-    @Column(name = "isActive", nullable = false)
-    private Boolean isActive;
+    @Column(name = "isActive")
+    private Boolean isActive = true;
 
-
-    public Client() {
-    }
-
-    public Client(long id, String email, String phone, String name, int age, String sex, Boolean isActive) {
-        this.id = id;
-        this.email = email;
-        this.phone = phone;
-        this.name = name;
-        this.age = age;
-        this.sex = sex;
-        this.isActive = isActive;
-    }
 
     public long getId() {
         return id;
@@ -60,11 +53,11 @@ public class Client {
         this.email = email;
     }
 
-    public String getPhone() {
+    public int getPhone() {
         return phone;
     }
 
-    public void setPhone(String phone) {
+    public void setPhone(int phone) {
         this.phone = phone;
     }
 
@@ -84,11 +77,11 @@ public class Client {
         this.age = age;
     }
 
-    public String getSex() {
+    public Sex getSex() {
         return sex;
     }
 
-    public void setSex(String sex) {
+    public void setSex(Sex sex) {
         this.sex = sex;
     }
 
@@ -99,21 +92,4 @@ public class Client {
     public void setActive(Boolean active) {
         isActive = active;
     }
-
-    @Override
-    public String toString() {
-        return "Client{" +
-                "id=" + id +
-                ", email='" + email + '\'' +
-                ", phone='" + phone + '\'' +
-                ", name='" + name + '\'' +
-                ", age=" + age +
-                ", sex='" + sex + '\'' +
-                ", isActive=" + isActive +
-                '}';
-    }
-
-
-
-
 }

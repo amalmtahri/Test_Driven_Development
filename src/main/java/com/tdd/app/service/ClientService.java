@@ -54,7 +54,6 @@ public class ClientService implements IClientService {
         Client client = clientMapping.convertToEntity(clientDto,Client.class);
         Client client1=  repository.save(client);
         return clientMapping.convertToDto(client1, ClientDto.class);
-
     }
 
     public ClientDto getClientByEmail(String email){

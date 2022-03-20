@@ -5,6 +5,7 @@ import com.tdd.app.enumeration.Sex;
 import lombok.*;
 
 import javax.persistence.*;
+import javax.validation.constraints.Size;
 
 
 @Builder
@@ -27,6 +28,7 @@ public class Client {
     private String name;
 
     @Column(name = "age", nullable = false)
+    @Size(min = 20, max = 70)
     private int age;
 
     @Column(name = "sex", nullable = false)

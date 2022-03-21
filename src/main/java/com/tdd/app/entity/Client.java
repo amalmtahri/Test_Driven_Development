@@ -5,6 +5,7 @@ import com.tdd.app.enumeration.Sex;
 import lombok.*;
 
 import javax.persistence.*;
+import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 
@@ -21,14 +22,14 @@ public class Client {
     @Column(name = "email", nullable = false, unique=true)
     private String email;
 
-    @Column(name = "phone", nullable = false, unique=true, length = 10)
-    private int phone;
+    @Pattern(regexp = "(\\+212|1)(\\d){9}")
+    @Column(name = "phone", nullable = false, unique=true)
+    private String phone;
 
     @Column(name = "name", nullable = false)
     private String name;
 
     @Column(name = "age", nullable = false)
-    @Size(min = 20, max = 70)
     private int age;
 
     @Column(name = "sex", nullable = false)
@@ -55,11 +56,11 @@ public class Client {
         this.email = email;
     }
 
-    public int getPhone() {
+    public String getPhone() {
         return phone;
     }
 
-    public void setPhone(int phone) {
+    public void setPhone(String phone) {
         this.phone = phone;
     }
 

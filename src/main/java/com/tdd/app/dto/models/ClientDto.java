@@ -3,13 +3,16 @@ package com.tdd.app.dto.models;
 
 import com.tdd.app.enumeration.Sex;
 
+import javax.validation.constraints.Pattern;
+
 public class ClientDto {
 
     private long id;
 
     private String email;
 
-    private int phone;
+    @Pattern(regexp = "(\\+212|1)(\\d){9}")
+    private String phone;
 
     private String name;
 
@@ -22,7 +25,7 @@ public class ClientDto {
     public ClientDto() {
     }
 
-    public ClientDto(long id, String email, int phone, String name, int age, Sex sex, Boolean isActive) {
+    public ClientDto(long id, String email, String phone, String name, int age, Sex sex, Boolean isActive) {
         this.id = id;
         this.email = email;
         this.phone = phone;
@@ -48,11 +51,11 @@ public class ClientDto {
         this.email = email;
     }
 
-    public int getPhone() {
+    public String getPhone() {
         return phone;
     }
 
-    public void setPhone(int phone) {
+    public void setPhone(String phone) {
         this.phone = phone;
     }
 

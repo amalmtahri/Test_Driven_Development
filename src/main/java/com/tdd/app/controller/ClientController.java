@@ -18,13 +18,13 @@ public class ClientController {
     @Autowired
     private ClientService clientService;
 
-    @GetMapping("/getAll")
+    @GetMapping(value = "/getAll")
     public ResponseEntity<List<ClientDto>> getAllClients(){
         List<ClientDto> clientDtos = clientService.getClients();
         return  ResponseEntity.ok(clientDtos);
     }
 
-    @PostMapping("addClient")
+    @PostMapping("/addClient")
     public ClientDto addClient(@RequestBody ClientDto clientDto){
         return clientService.addClient(clientDto);
     }

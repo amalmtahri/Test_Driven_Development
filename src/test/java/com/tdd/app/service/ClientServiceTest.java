@@ -44,8 +44,8 @@ class ClientServiceTest {
 
     @Test
     void getClients() {
-        ClientDto clientDto1 = new ClientDto(1L, "test1@gmail.com",1222222,"test1",12, Sex.Homme,true);
-        ClientDto clientDto2 = new ClientDto(2L, "test2@gmail.com",98609876,"test2",13,Sex.Homme,true);
+        ClientDto clientDto1 = new ClientDto(1L, "test1@gmail.com","+212659697087","test1",12, Sex.Homme,true);
+        ClientDto clientDto2 = new ClientDto(2L, "test2@gmail.com","+212612370807","test2",13,Sex.Homme,true);
         List<ClientDto> clientDtos = new ArrayList<>();
         clientDtos.add(clientDto1);
         clientDtos.add(clientDto2);
@@ -55,30 +55,29 @@ class ClientServiceTest {
 
     @Test
     void addClient() {
-        ClientDto clientDto1 = new ClientDto(1L, "test1@gmail.com",1222222,"test1",12,Sex.Homme,true);
+        ClientDto clientDto1 = new ClientDto(1L, "test1@gmail.com","+212659697087","test1",12,Sex.Homme,true);
         Mockito.when(clientService.addClient(clientDto1))
                 .thenReturn(clientDto1);
         assertThat(clientService.addClient(clientDto1)).isEqualTo(clientDto1);
-
     }
 
     @Test
     void getClientById() {
-        ClientDto clientDto1 = new ClientDto(1L, "test1@gmail.com",1222222,"test1",12,Sex.Homme,true);
+        ClientDto clientDto1 = new ClientDto(1L, "test1@gmail.com","+212659697087","test1",12,Sex.Homme,true);
         Mockito.when(clientService.getClientById(1L)).thenReturn(clientDto1);
         assertNotNull(clientService.getClientById(1L));
     }
 
     @Test
     void deleteClient() {
-        ClientDto clientDto1 = new ClientDto(1L, "test1@gmail.com",1222222,"test1",12,Sex.Homme,true);
+        ClientDto clientDto1 = new ClientDto(1L, "test1@gmail.com","+212659697087","test1",12,Sex.Homme,true);
         assertThat(clientService.deleteClient(clientDto1.getId())).isEqualTo("Client removed !!");
 
     }
 
     @Test
     void updateClient() {
-        ClientDto clientDto1 = new ClientDto(1L, "test1@gmail.com",1222222,"test1",12,Sex.Homme,true);
+        ClientDto clientDto1 = new ClientDto(1L, "test1@gmail.com","+212659697087","test1",12,Sex.Homme,true);
         Mockito.when(clientService.updateClient(clientDto1))
                 .thenReturn(clientDto1);
         assertThat(clientService.updateClient(clientDto1).getName()).isEqualTo("test1");
@@ -86,15 +85,15 @@ class ClientServiceTest {
 
     @Test
     void getClientByEmailTest(){
-        ClientDto clientDto1 = new ClientDto(1L, "test1@gmail.com",1222222,"test1",12,Sex.Homme,true);
+        ClientDto clientDto1 = new ClientDto(1L, "test1@gmail.com","+212659697087","test1",12,Sex.Homme,true);
         Mockito.when(clientService.getClientByEmail("test1@gmail.com")).thenReturn(clientDto1);
         assertThat(clientService.getClientByEmail("test1@gmail.com").getEmail()).isEqualTo("test1@gmail.com");
     }
 
     @Test
     void findBySexTest(){
-        ClientDto client1 = new ClientDto(1L, "test1@gmail.com",1222222,"test1",12,Sex.Homme,true);
-        ClientDto client2 = new ClientDto(2L, "test2@gmail.com",65609876,"test2",13,Sex.Homme,true);
+        ClientDto client1 = new ClientDto(1L, "test1@gmail.com","+212659697087","test1",12,Sex.Homme,true);
+        ClientDto client2 = new ClientDto(2L, "test2@gmail.com","+212653476087","test2",13,Sex.Homme,true);
         List<ClientDto> clients = new ArrayList<>();
         clients.add(client1);
         clients.add(client2);

@@ -12,7 +12,6 @@ public class TddApplication {
         SpringApplication.run(TddApplication.class, args);
     }
 
-
     @Bean
     public ModelMapper modelMapper() {
         return new ModelMapper();

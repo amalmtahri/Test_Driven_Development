@@ -30,7 +30,7 @@ class ClientServiceTest {
     private ClientService clientService;
 
     @Mock
-    private ClientRepository repository;
+    private ClientRepository clientRepository;
 
     @Mock
     IMapClassWithDto<Client, ClientDto> clientMapping;
@@ -39,7 +39,7 @@ class ClientServiceTest {
 
     @BeforeEach
     public void setup() {
-        clientService = new ClientService(clientMapping, repository);
+        clientService = new ClientService(clientMapping, clientRepository);
     }
 
     @Test

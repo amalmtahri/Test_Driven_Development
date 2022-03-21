@@ -11,6 +11,7 @@ import org.mockito.junit.MockitoJUnitRunner;
 import org.mockito.junit.jupiter.MockitoExtension;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -45,6 +46,14 @@ class ClientRepositoryTest {
         Client client1 = new Client(1L, "test1@gmail.com","+212659697087","test1",12,Sex.Homme,true);
         clientRepository.deleteById(client1.getId());
         assertThat(clientRepository.getById(client1.getId())).isNull();
+    }
+
+    @Test
+    void findById(){
+        Client client1 = new Client(1L, "test1@gmail.com","+212659697087","test1",12,Sex.Homme,true);
+        Mockito.when(clientRepository.findById(client1.getId())).thenReturn(Optional.of(client1));
+        assertThat(clientRepository.findById(client1.getId())).isNotNull();
+
     }
 
     @Test

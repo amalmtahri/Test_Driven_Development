@@ -1,94 +1,107 @@
 package com.tdd.app.controller;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.tdd.app.dto.models.ClientDto;
 import com.tdd.app.enumeration.Sex;
 import com.tdd.app.service.ClientService;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.runner.RunWith;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
-import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.http.ResponseEntity;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.http.MediaType;
+import org.springframework.test.web.servlet.MockMvc;
 
 import java.util.ArrayList;
 import java.util.List;
+import static org.mockito.Mockito.when;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
 
-
-@ExtendWith(MockitoExtension.class)
 @RunWith(MockitoJUnitRunner.Silent.class)
+@WebMvcTest(ClientController.class)
 class ClientControllerTest {
 
-    @InjectMocks
-    private ClientController clientController;
 
-    @Mock
+
+    @Autowired
+    private MockMvc mockMvc;
+
+    @MockBean
     private ClientService clientService;
 
-    @BeforeEach
-    public void setup() {
-        clientController = new ClientController(clientService);
+
+    @Test
+    void getAllClients() throws Exception {
+        ClientDto clientDto1 = new ClientDto(1L, "test1@gmail.com","+212659697087","test1",12,Sex.Homme,true);
+        ClientDto clientDto2 = new ClientDto(2L, "test2@gmail.com","+212659987087","test2",12,Sex.Homme,true);
+    List<ClientDto> clientDtos = new ArrayList<>();
+    clientDtos.add(clientDto1);
+    clientDtos.add(clientDto2);
+    when(clientService.getClients()).thenReturn(clientDtos);
+        mockMvc.perform(get("/api/client/getAll"))
+                .andExpect(status().isOk());
     }
 
     @Test
-    void getAllClients() {
+    void addClient() throws Exception {
+        ClientDto clientDto1 = new ClientDto(1L, "test1@gmail.com","+212659697087","test1",12,Sex.Homme,true);
+        when(clientService.addClient(clientDto1))
+                .thenReturn(clientDto1);
 
-        ClientDto clientDto1 = new ClientDto(1L, "test1@gmail.com","+212659697087","test1",12, Sex.Homme,true);
-        ClientDto clientDto2 = new ClientDto(2L, "test2@gmail.com","+212655667087","test2",13,Sex.Homme,true);
+        mockMvc.perform(post("/api/client/addClient")
+                        .contentType(MediaType.APPLICATION_JSON)
+                .content(new ObjectMapper().writeValueAsString(clientDto1)))
+                .andExpect(status().isOk());
+
+
+    }
+
+    @Test
+    void findById() throws Exception {
+        ClientDto clientDto1 = new ClientDto(1L, "test1@gmail.com","+212659697087","test1",12,Sex.Homme,true);
+        when(clientService.getClientById(clientDto1.getId())).thenReturn(clientDto1);
+        mockMvc.perform(get("/api/client/findBy/" + clientDto1.getId())
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk());
+    }
+
+
+    @Test
+    void updateClient() throws Exception {
+        ClientDto clientDto1 = new ClientDto(1L, "test1@gmail.com","+212659697087","test1",12,Sex.Homme,true);
+
+                when(clientService.addClient(clientDto1))
+                .thenReturn(clientDto1);
+        mockMvc.perform(put("/api/client/updateClient/"+ clientDto1.getId())
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(new ObjectMapper().writeValueAsString(clientDto1)))
+                .andExpect(status().isOk());
+
+
+    }
+
+    @Test
+    void findByEmailTest() throws Exception {
+        ClientDto clientDto1 = new ClientDto(1L, "test1@gmail.com","+212659697087","test1",12,Sex.Homme,true);
+        when(clientService.getClientByEmail(clientDto1.getEmail())).thenReturn(clientDto1);
+        mockMvc.perform(get("/api/client/findByEmail/" + clientDto1.getEmail())
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk());
+    }
+
+    @Test
+    void findBySexTest() throws Exception {
+        ClientDto clientDto1 = new ClientDto(1L, "test1@gmail.com","+212659697087","test1",12,Sex.Homme,true);
+        ClientDto clientDto2 = new ClientDto(2L, "test2@gmail.com","+212698762287","test2",12,Sex.Homme,true);
         List<ClientDto> clientDtos = new ArrayList<>();
         clientDtos.add(clientDto1);
         clientDtos.add(clientDto2);
-        ResponseEntity<List<ClientDto>> clientDtoResponseEntity = clientController.getAllClients();
-        assertThat(clientDtoResponseEntity).isNotNull();
-
-    }
-
-    @Test
-    void addClient() {
-        ClientDto clientDto1 = new ClientDto(1L, "test1@gmail.com","+212659697087","test1",12,Sex.Homme,true);
-        Mockito.when(clientController.addClient(clientDto1))
-                .thenReturn(clientDto1);
-        assertThat(clientController.addClient(clientDto1)).isEqualTo(clientDto1);
-    }
-
-    @Test
-    void findById() {
-        ClientDto clientDto1 = new ClientDto(1L, "test1@gmail.com","+212659697087","test1",12,Sex.Homme,true);
-        Mockito.when(clientController.findById(1L)).thenReturn(clientDto1);
-        assertNotNull(clientController.findById(1L));
-    }
-
-
-    @Test
-    void updateClient() {
-        ClientDto clientDto1 = new ClientDto(1L, "test1@gmail.com","+212659697087","test1",12,Sex.Homme,true);
-        Mockito.when(clientController.updateClient(clientDto1))
-                .thenReturn(clientDto1);
-        assertThat(clientController.updateClient(clientDto1).getName()).isEqualTo("test1");
-
-    }
-
-    @Test
-    void findByEmailTest(){
-        ClientDto clientDto1 = new ClientDto(1L, "test1@gmail.com","+212659697087","test1",12,Sex.Homme,true);
-        Mockito.when(clientController.findByEmail("test1@gmail.com")).thenReturn(clientDto1);
-        assertThat(clientController.findByEmail("test1@gmail.com").getEmail()).isEqualTo("test1@gmail.com");
-    }
-
-    @Test
-    void findBySexTest(){
-        ClientDto client1 = new ClientDto(1L, "test1@gmail.com","+212659697087","test1",12,Sex.Homme,true);
-        ClientDto client2 = new ClientDto(2L, "test2@gmail.com","+212659987087","test2",13,Sex.Homme,true);
-        List<ClientDto> clients = new ArrayList<>();
-        clients.add(client1);
-        clients.add(client2);
-        ResponseEntity<List<ClientDto>> clientDtoResponseEntity = clientController.findBySex("homme");
-        assertThat(clientDtoResponseEntity).isNotNull();
+        when(clientService.findBySex("Homme")).thenReturn(clientDtos);
+        mockMvc.perform(get("/api/client/findBySex/" + clientDto1.getSex())
+                        .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk());
     }
 }

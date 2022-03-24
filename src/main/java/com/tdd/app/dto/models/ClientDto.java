@@ -20,7 +20,7 @@ public class ClientDto {
 
     private Sex sex;
 
-    private Boolean isActive;
+    private Boolean isActive = true;
 
     public ClientDto() {
     }

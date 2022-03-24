@@ -20,10 +20,8 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 
-@RunWith(MockitoJUnitRunner.Silent.class)
 @WebMvcTest(ClientController.class)
 class ClientControllerTest {
-
 
 
     @Autowired
@@ -50,13 +48,10 @@ class ClientControllerTest {
         ClientDto clientDto1 = new ClientDto(1L, "test1@gmail.com","+212659697087","test1",12,Sex.Homme,true);
         when(clientService.addClient(clientDto1))
                 .thenReturn(clientDto1);
-
         mockMvc.perform(post("/api/client/addClient")
                         .contentType(MediaType.APPLICATION_JSON)
                 .content(new ObjectMapper().writeValueAsString(clientDto1)))
                 .andExpect(status().isOk());
-
-
     }
 
     @Test
@@ -79,8 +74,6 @@ class ClientControllerTest {
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(new ObjectMapper().writeValueAsString(clientDto1)))
                 .andExpect(status().isOk());
-
-
     }
 
     @Test
